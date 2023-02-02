@@ -6,5 +6,5 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
-    <string name="weather_api_key">Ключ полученный вами</string>
+    <string name="weather_api_key">77f3ccd7e92eb3a02bebbe5f64e05415</string>
 </resources>

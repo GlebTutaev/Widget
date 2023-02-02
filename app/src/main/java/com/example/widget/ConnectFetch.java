@@ -11,9 +11,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ConnectFetch {
-    private static final String OPEN_WEATHER_MAP_API = "https://api.openweathermap.org/data/2.5/weather";
+    private static final String OPEN_WEATHER_MAP_API = "https://api.openweathermap.org/data/2.5/weather?q=Orenburg&appid={77f3ccd7e92eb3a02bebbe5f64e05415}&units=metric";
 
-    private static final  String OPEN_WEATHER_ICON = "http://api.openweathermap.org/data/2.5/weather?q=Orenburg";
+    private static final  String OPEN_WEATHER_ICON = "http://openweathermap.org/img/wn/10d@2x.png";
     public static JSONObject getJSON(Context context, String city){
 
         try{
