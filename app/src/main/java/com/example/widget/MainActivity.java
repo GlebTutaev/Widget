@@ -11,6 +11,8 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -22,41 +24,49 @@ public class MainActivity extends AppCompatActivity {
 
         handler = new Handler();
         updateWeatherData("Orenburg");
-
-
-
     }
 
     private void updateWeatherData(final String city) {
+
         new Thread(){
-            public void run(){
+            @Override
+            public void run() {
                 final JSONObject json = ConnectFetch.getJSON(MainActivity.this, city);
                 if(json == null){
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(MainActivity.this,
-                                    city + "-информация не найдена",
-                                    Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, city +
+                                    "-информация не надйнеа", Toast.LENGTH_SHORT).show();
                         }
                     });
-                }
-                else {
+                }else {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            { renderWeather(json);
+                            renderWeather(json);
                         }
                     });
                 }
+                super.run();
             }
         }.start();
+    }
 
-
-        private void renderWeather(JSONObject json) {
-
+    private void renderWeather(JSONObject json) {
+        try {
+            JSONObject details = json.getJSONArray("weather").getJSONObject(0);
+            ((TextView)findViewById(R.id.weather)).setText(details.getString("description").toUpperCase(Locale.ROOT));
+        }catch (Exception e){
+            Log.e("SimpleWeather", "One more fields not found in the JSON data");
         }
- }
+    }
+
+
+}
+
+
+
 
 
 
